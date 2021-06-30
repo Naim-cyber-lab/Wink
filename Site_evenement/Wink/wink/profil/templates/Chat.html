@@ -44,7 +44,7 @@ var formData = document.querySelector("#form")
       })
   }
 
-  socket.onmessage = function(e){ //Le message envoyé par consumer est récupéré dans e
+  socket.onmessage = function(e){ //Le message envoyé par consumer et est récupéré dans e
     console.log("message de onmessage" , e)
     var dict = JSON.parse(e.data)
     //console.log(dict)
