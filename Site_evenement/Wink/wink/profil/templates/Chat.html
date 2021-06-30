@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>Chat l'equipe !</title>
+    </head>
+    <body>
+        <h2>Chat entre {{user.username}} et {{other_user.username}}</h2>
+        <ul id="displayMessage">
+          <li>Voici un message </li>
+          <li>Voici un autre message</li>
+          <li>En voici encore un</li>
+          <li>Et pour finir voici le dernier message</li>
+        </ul>
+        <form id='form' method='POST'>
+            <h4>{{user.username}}</h4>
+            {% csrf_token %}
+            <input id="buttonMessage" type="text">
+            <input id="buttonData" type="submit" value="salut" class="btn btn-success">
+        </form>
+    </body>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+        <script>
+ 
+var formData = document.querySelector("#form")
+
+
+  var loc = window.location
+  var wsStart = 'ws://' 
+  if (loc.protocol == 'https:'){
+    wsStart = 'wss://'
+  }
+
+  var endpoint = wsStart + loc.host + loc.pathname
+  var socket = new WebSocket(endpoint)
+
+  socket.onopen = function(e){
+      document.querySelector('#buttonData').addEventListener('click',function(event){
+          event.preventDefault();
+          var finalData = {
+              'message':$('#buttonMessage').val()
+          }
+          
+          socket.send(JSON.stringify(finalData))
+          $('#buttonMessage').val('')
+      })
+  }
+
+  socket.onmessage = function(e){ //Le message envoyé par consumer est récupéré dans e
+    console.log("message de onmessage" , e)
+    var dict = JSON.parse(e.data)
+    //console.log(dict)
+    $('#displayMessage').append('<li>' + dict.message + ' via  ' + dict.username + '</li>' )
+  }
+
+  
+
+  socket.onerror = function(e){
+    console.log("message erreur : " , e) 
+  }
+
+  socket.onclose = function(e){
+    console.log("message de fermeture" , e)
+  }
+
+</script>
+</html>

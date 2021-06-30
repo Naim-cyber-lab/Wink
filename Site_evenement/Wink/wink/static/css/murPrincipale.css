@@ -1,0 +1,428 @@
+
+.cloche {
+    cursor: pointer;
+    margin: 0;
+}
+
+.clocheAffiche {
+    transition-duration: 0.35s;
+    position: absolute;
+    border: 1px solid black;
+    border-top:0px grey;
+    background-color: #f3f3f3;
+    box-shadow : -10px -15px 15px #aaa inset;
+    float : left;
+    overflow: auto;
+    border-radius: 25px;
+    height: 0;
+    width: 0;
+}
+
+.clocheAffiche span:hover {
+    opacity:0.6;
+}
+.EnTete{
+    position: relative;
+    background-color: rgb(128, 128, 128);
+    top:0;
+}
+
+.EcritureArticle{
+    font-size:13px;
+}
+h3{
+    display : inline;
+}
+.image_profil{
+    float: right;
+    padding-right : 5px;
+}
+icon_profil {
+    position: absolute;
+    margin-left:96%;
+}
+.image_profil img{
+    border-radius: 50%; /* Cela permet de mettre l'image en rond sur l'article */
+
+}
+#titre{
+    position:relative;
+    left:20%;
+    top:3px;
+    font-size: 1.5em;
+    font-style:italic;
+}
+
+.barreBas{
+    bottom : 3px;
+    width: 100%;
+}
+
+
+
+.articles{
+    display:flex;
+    
+}
+icons {
+    order : 1; /*Par defaut tous les orders sont à zéros et donc en mettant l'order à 1 il va se mettre en bas */
+    float: right;
+}
+
+icons i {
+    cursor: pointer;
+    margin: 0 13px 13px 0;
+    margin-top: none;
+}
+
+.photo_de_profil{
+    display: inline-block;
+    border-radius : 25px;
+    margin : 20px;
+}
+
+iconProfil  {
+    position: absolute;
+    top: 75%;
+    left: 20%;
+}
+
+iconProfil  i {
+    display : inline;
+    margin : 40px;
+    width: 10px;
+    height: 10px;
+    cursor : pointer;
+}
+
+.description {
+    position: absolute;
+    margin-left: 20%;
+    border: 1px solid black;
+    background-color: #f3f3f3;
+    left:110px;
+    width:45%;
+    height: 470px;
+    left: 30%;
+    border-radius : 25px;
+    box-shadow : -10px -15px 15px #aaa inset;
+    top: 45px;
+}
+
+.image_profill {
+    margin-left: 40px;
+}
+
+flecheDroit {
+    position: absolute;
+    top:65%;
+    margin-left: 88%;
+    cursor: pointer;
+}
+
+cancel {
+    opacity: 0;
+    position: absolute;
+    top:9%;
+    font-size: 50px;
+    margin-left:82%;
+    color:white;
+    cursor: pointer;
+}
+
+flecheGauche {
+    position: absolute;
+    top:35%;
+    margin-left:88%;
+    cursor: pointer;
+}
+
+p{
+    margin:0 0 0 6px;
+}
+
+i span{
+    position:absolute;
+    transition:all .25s;
+    transform:scale(0) rotate(-12deg);
+    opacity:0;
+    color:#09c;
+    background:rgba(0,0,0,.9);
+    padding:15px;
+    border-radius:3px;
+    box-shadow:0 0 2px rgba(0,0,0,.5);
+    margin-top:23px;
+    margin-left:-35px;
+}
+i:hover span, i:focus span{
+    transform:scale(1) rotate(0);  
+    opacity:1;
+}
+
+interet a  {
+    margin: 0 10px 0 15px;
+    cursor: pointer;
+    color : black;
+}
+
+
+a:hover span, a:focus span{
+    transform:scale(1) rotate(0);  
+    opacity:1;
+}
+
+a span {
+    position:absolute;
+    transition:all .25s;
+    transform:scale(0) rotate(-12deg);
+    opacity:0;
+    color:#09c;
+    background:rgba(0,0,0,.9);
+    padding:15px;
+    border-radius:3px;
+    box-shadow:0 0 2px rgba(0,0,0,.5);
+    margin-top:-43px;
+     margin-left:-35px;
+}
+
+header input {
+    text-align: center;
+}
+
+.vrai_barre_recherche {
+    border-radius: 20px;
+    outline: none;
+}
+
+header .barre_recherche {
+    margin-left : 40%;
+}
+
+.titre_chat {
+    float:right;
+    margin-right: 10px;
+}
+
+lien_header {
+    float : right;
+}
+lien_header img {
+    position: relative;
+    margin-top: 200px;
+    float: right;
+}
+
+notif  {
+    vertical-align: top;
+    padding : 3px;
+    text-align: center;
+    border-radius: 50%;
+    background: red;
+    color : white;
+    font-size : 13px;
+    margin-top: -50px;
+    margin-left: 10px;
+}
+lien_header i {
+    margin-bottom:0 0 0 0;
+}
+lien_header img, lien_header a {
+    margin: 2px 10px auto 10px;
+    color: black;
+}
+
+.mesGroupes {
+    overflow: auto;
+    position: fixed;
+    display: inline-block;
+    margin-left : 0;
+    width: 18%;
+    height: 670px;
+    background-color: #f3f3f3;
+    border-radius : 25px;
+    box-shadow : -10px -15px 15px #aaa inset;
+}
+.mesGroupes ul {
+    margin-right : 5px;
+}
+
+.description h2 {
+    margin-left: 35%;
+    
+}
+
+.mesGroupes img {
+    margin-right: 50%;
+    display: block;
+}
+
+.envoieMessage {
+    width : 90%;
+    border-radius : 25px;
+    margin-bottom:6px;
+}
+
+.salon i, specification i {
+    margin:0 10px 0 10px;
+    cursor:pointer;
+    float: right;
+}
+
+.salon span {
+  
+    margin-left: 25%;
+
+}
+
+.salon salon {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    border-radius : 25px;
+    border: 1px solid black;
+}
+
+attente {
+    margin-left: 25%;
+}
+
+.profil {
+    position : relative;
+    display:inline-block;
+    border: 1px solid black;
+    background-color: #f3f3f3;
+    left:110px;
+    /* top:10px; */
+    width:50%;
+    height: 500px;
+    left: 3%;
+    border-radius : 25px;
+    box-shadow : -10px -15px 15px #aaa inset;
+}
+
+.profil img {
+    position:absolute;
+    display:inline-block;
+    margin-left:67%;
+    margin-top:1%;
+    border-radius: 20%;
+}
+.icon_profil {
+    position: absolute;
+    display: inline-block;
+    width:46.8%;
+    padding-left: 3%;
+}
+.icon_profil i {
+    padding-left:13%;
+    margin: 5% 4% 5% 4%;
+    width: 50px;
+    cursor:pointer;
+}
+
+body {
+    margin :0;
+    top :0;
+    background-color: rgb(196, 190, 190);
+    fill-opacity: 0.7;
+    transition : 2s;
+}
+
+.Article h2 {
+    /* margin-left:29%; */
+    text-align: center;
+}
+
+iconProfilRight {
+    position: absolute;
+    margin-top: 23%;
+    /* margin-right: 50%; */
+}
+
+iconProfilLeft {
+    position: absolute;
+    margin-top: 23%;
+    float:right;
+    /* margin-right: 50%; */
+}
+.slideArticles {
+    display:flex;
+    width:100%;
+    transition: 0.5s linear;
+}
+.slideArticle {
+    flex: 1 0 100%; /* pour qu'il prenne toute la place */
+    height:620px;
+}
+
+.filActualite {
+    position : relative;
+    border: 1px solid black;
+    background-color: #f3f3f3;
+    left:110px;
+    width:60%;
+    height: 700px;
+    left: 20%;
+    top:-23px;
+    border-radius : 25px;
+    box-shadow : -10px -15px 15px #aaa inset;
+    overflow: hidden;
+
+}
+
+.Article {
+    position:relative;
+    flex:1 0 100%;
+}
+
+.allArticles{
+    display:flex;
+    position:relative;
+    flex-direction: column;
+    transition:0.5s;
+}
+
+.afficheInscription {
+    position : relative;
+    border: 1px solid black;
+    background-color: #f3f3f3;
+    width:0%;
+    height: 0px;
+    left: 20%;
+    top:-23px;
+    border-radius : 25px;
+    box-shadow : -10px -15px 15px #aaa inset;
+    overflow: hidden;
+}
+
+.form-con input {
+    border-radius:5px;
+    width:80%;
+    height:25px;
+    margin-bottom:5%;
+    margin-left:5%;
+}
+
+.afficheInscription div {
+    margin-top : 5%; 
+    margin-bottom : 5%;
+    margin-left: 50%;
+    transform:translateX(-25%);
+}
+
+.afficheInscription div input {
+    width: 50%;
+    height: 30px;
+    border-radius: 5px;
+}
+
+#phrase_conn , #phrase_conn1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 25px;
+    text-align:center;
+}
+
+#phrase_conn1 {
+    font-size: 35px;
+    
+}

@@ -1,0 +1,211 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">     
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static '/css/chat.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static '/css/threePoints.css' %}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+{% if user.is_authenticated %}
+        <div class="container">
+            <div class="row">
+                <nav class="navbar navbar-default" role="navigation">
+          
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+        
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <!-- <li><a href="/profil/DisplayEvents/">Wink</a></li> -->
+                <li class="dropdown">
+                <a href="/profil/DisplayEvents/" class="dropdown-toggle" data-toggle="dropdown">Wink<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    {% for event in ListIdEventParticipe %}
+                      <li><a href="/profil/ParticipeEvent/idEvent={{event.id}}">{{event.titre}}</a></li>
+                    {% endfor %}
+                  </ul>
+                  </li>
+                
+                <!-- <li><a href="/FeedbackJeux/">Jeux</a></li> -->
+                <li class="dropdown">
+                    <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profil<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="">Attente</a></li>
+                      <li><a href="">Historique</a></li>
+                    </ul>  -->
+                <li class="active dropdown">
+                  <a href="/profil/" class="dropdown-toggle" data-toggle="dropdown">Profil<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <!-- <li><a href="/Equipes/ListesEquipes/">Listes des equipes</a></li> -->
+                    <li><a href="/profil/modifProfil/">Modif Profil</a></li>
+                    <li><a href="">J'y participe</a></li>
+                    <li><a href="/profil/Attente/">Attente</a></li>
+                    <li><a href="/profil/CreateEvent/">Créer evenement</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Connection<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Listes des equipes</a></li>
+                      <li><a href="#">Etat de forme</a></li>
+                      <!-- <li><a href="/StatistiqueGame/">En fonction de "Jeux"</a></li> -->
+                      <li><a href="#">Assiduité</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <img style="border-radius:50%;width:75px;height:75px;image-rendering: crisp-edges" src="{{utilisateur.photoProfil.url}}">
+                  </li>
+              </ul>
+              
+            </div><!-- /.navbar-collapse -->
+          
+        </nav>
+        </div>
+
+        <div class="messaging">
+          <div class="inbox_msg">
+          <div class="inbox_people">
+            <div class="headind_srch">
+            <div class="recent_heading">
+              <h4>{{creatorWinker.username}}</h4>
+            </div>
+            
+            <div class="srch_bar">
+              <div class="stylish-input-group">
+              <input type="text" class="search-bar"  placeholder="Search" >
+              </div>
+            </div>
+
+            
+          
+            </div>
+            <div class="inbox_chat scroll">
+              <div class="chat_list">
+                <div class="chat_people">
+                <div class="chat_ib">
+                  <h4>SONDAGE</h4>
+                </div>
+                </div>
+              </div>
+              
+
+            {% for obj in objRamener %}
+            <div class="chat_list">
+              <div class="chat_people">
+              <div class="chat_ib">
+                <span class="chat_date">{{obj.date}} </span>{% if obj.fait == 1 %}<i class="fas fa-check-circle"></i>{% else %} <i class="fas fa-times-circle"></i> {% endif %}
+                <p>{{obj.message}}</p>
+                {% if creatorWinker.id == utilisateur.id %}
+                <form method='POST'>
+                  {% csrf_token %}
+                  
+                  {% if obj.fait == 0 %}
+                    <input name='ModifOK' type='submit' value="OK" style="border-radius: 50%;">
+                    {% else %}
+                    <input name='ModifAnnule'type='submit' value="ANNULE" style="border-radius: 50%;">
+                    {% endif %}
+                    <hide style="opacity:0;"><select name="ObjID"><option value="{{obj.id}}"></option></select></hide>
+                </form>
+                {% endif %}
+              </div>
+              </div>
+            </div>
+            {% endfor %}
+            
+            {% if creatorWinker.id == utilisateur.id %}
+            <div class="chat_list">
+              <div class="chat_people">
+              <div class="chat_ib">
+                <form method="POST">
+                  {% csrf_token %}
+                  <input name="message" type="text" placeholder="Nouvelle demande">
+                  <input name="nouvelleDemande" type="submit" class="btn btn-primary">
+                </form>
+              </div>
+              </div>
+            </div>
+            {% endif %}
+            </div>
+          </div>
+          <div class="mesgs">
+            <span style="color:black;position: relative;" id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+            <div class="action_menu" style="position : relative">
+                <ul>
+                    <li><i class="fas fa-user-circle"></i> Moyenne Age :{{MyEvent.moyenneAge}} ans  </li>
+                    <li><i class="fas fa-female"></i> Nombre de filles :{{MyEvent.nbFille}}  </li>
+                    <li><i class="fas fa-male"></i> Nombre de garçons : {{MyEvent.nbGarcon}} </li>
+                    <li><i class="fas fa-ban"></i> <form style="display: inline;" method="POST">{% csrf_token %}<input name="quitterEvent" type="submit" value="Quitter"></form> </li>
+                </ul>
+            </div>
+            <div class="msg_history">
+            <div class="incoming_msg">
+              <div class="received_msg">
+              <div class="received_withd_msg">
+                <p>Test which is a new approach to have all
+                solutions</p>
+                <span class="time_date"> 11:01 AM    |    June 9</span></div>
+              </div>
+            </div>
+            <div class="outgoing_msg">
+              <div class="sent_msg">
+              <p>Test which is a new approach to have all
+                solutions</p>
+              <span class="time_date"> 11:01 AM    |    June 9</span> </div>
+            </div>
+            <div class="incoming_msg">
+              <div class="received_msg">
+              <div class="received_withd_msg">
+                <p>Test, which is a new approach to have</p>
+                <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
+              </div>
+            </div>
+            <div class="outgoing_msg">
+              <div class="sent_msg">
+              <p>Apollo University, Delhi, India Test</p>
+              <span class="time_date"> 11:01 AM    |    Today</span> </div>
+            </div>
+            <div class="incoming_msg">
+              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="received_msg">
+              <div class="received_withd_msg">
+                <p>We work directly with our designers and suppliers,
+                and sell direct to you, which means quality, exclusive
+                products, at a price anyone can afford.</p>
+                <span class="time_date"> 11:01 AM    |    Today</span></div>
+              </div>
+            </div>
+            </div>
+            <div class="type_msg">
+            <div class="input_msg_write">
+              <input type="text" class="write_msg" placeholder="Type a message" />
+              <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+            </div>
+            </div>
+          </div>
+          </div>
+        </div>
+{% else %} <!-- il s'agit du else de if user.is_authenticated-->
+    <p>Vous n'etes pas connécté</p>
+{% endif %}
+
+    </body>
+
+<script type="text/javascript" src="{% static '/js/main.js' %}"></script>
+<script type="text/javascript" src="{% static '/js/threePoints.js' %}"></script>
+</html>

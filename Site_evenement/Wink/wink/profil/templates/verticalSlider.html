@@ -1,0 +1,83 @@
+<html>
+    <head>
+
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <!------ Include the above in your HEAD tag ---------->
+    </head>
+    <style>
+    
+    If you have a set number of frames, I would suggest placing them all in a single div, and changing the top value of that. that way, only one value need be modified.
+
+Like this: http://jsfiddle.net/xkh4D/10/
+
+(Note that, though px are used, vh or whichever other unit should work just as well... haven't tried %, though...)
+
+HTML
+
+<div id='yo' class='view'>
+    <div>
+        <div class='frame red'></div>
+        <div class='frame green'></div>
+        <div class='frame blue'></div>
+    </div>
+</div>
+<input type='button' value='Scroll' onclick='scrollFrame()'/>
+CSS
+
+.view {
+    position:relative;
+    width:300px;
+    height:250px;
+    border:1px solid black;
+    overflow:hidden;
+}
+.view > div {
+    position:absolute;
+    width:inherit;
+    height:inherit;
+    top:0px;
+}
+.frame {
+    width:inherit;
+    height:inherit;
+}
+.red { background-color:#faa }
+.green { background-color:#afa }
+.blue { background-color:#aaf }
+        </style>
+        <body>
+            <div id='yo' class='view'>
+                <div>
+                    <div class='frame red'></div>
+                    <div class='frame green'></div>
+                    <div class='frame blue'></div>
+                </div>
+            </div>
+            <input type='button' value='Scroll' onclick='scrollFrame()'/>
+        </body>
+
+
+
+
+
+
+<script>
+scrollFrame = function()
+{
+    var h = $('#yo').height();
+    var y = parseFloat($('.view > div').css('top'));
+
+    var hsum = $('.view .frame').length * h;
+
+    console.log('h,y,hsum',h,y,hsum);
+
+    if (hsum-h == -1*y)
+        $('.view > div').animate({'top':0});
+    else
+        $('.view > div').animate({top:y-h},500);
+}
+</script>
+
+</html>

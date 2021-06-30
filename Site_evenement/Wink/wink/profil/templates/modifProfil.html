@@ -1,0 +1,141 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static '/css/carousel.css' %}">
+    </head>
+    <body>
+{% if user.is_authenticated %}
+        <div class="container">
+            <div class="row">
+                <nav class="navbar navbar-default" role="navigation">
+          
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+        
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li><a href="/profil/DisplayEvents/">Wink</a></li>
+                <!-- <li><a href="/FeedbackJeux/">Jeux</a></li> -->
+                <li class="dropdown">
+                    <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profil<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="">Attente</a></li>
+                      <li><a href="">Historique</a></li>
+                    </ul>  -->
+                <li class="active dropdown">
+                  <a href="/profil/" class="dropdown-toggle" data-toggle="dropdown">Profil<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <!-- <li><a href="/Equipes/ListesEquipes/">Listes des equipes</a></li> -->
+                    <li><a href="/profil/modifProfil/">Modif Profil</a></li>
+                    <li><a href="">J'y participe</a></li>
+                    <li><a href="/profil/Attente/">Attente</a></li>
+                    <li><a href="/profil/CreateEvent/">Créer evenement</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Connection<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/profil/DisplayEvents/">Listes des equipes</a></li>
+                      <li><a href="#">Etat de forme</a></li>
+                      <!-- <li><a href="/StatistiqueGame/">En fonction de "Jeux"</a></li> -->
+                      <li><a href="#">Assiduité</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <img style="border-radius:50%;width:75px;height:75px;image-rendering: crisp-edges" src="{{utilisateur.photoProfil.url}}">
+                  </li>
+              </ul>
+              
+            </div><!-- /.navbar-collapse -->
+          
+        </nav>
+        </div>
+        <div class="container">
+          <div class="container">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+              </ol>
+          
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner">
+          
+                <div class="item active">
+                  <div class="carousel-caption">
+                    <h3>Photo de profil</h3>
+                    <p>Peaky Blinders !</p>
+                  </div>
+                </div>
+          
+                <div class="item">
+                  <img src="C:\Users\naims\OneDrive\Images\SavedPictures\bureau.jpg" alt="Chicago" style="width:100%;">
+                  <div class="carousel-caption">
+                    <h3>Chicago</h3>
+                    <p>Thank you, Chicago!</p>
+                  </div>
+                </div>
+              
+                <div class="item">
+                  <img src="C:\Users\naims\OneDrive\Images\SavedPictures\mcgregor.jpg" alt="New York" style="width:100%;">
+                  <div class="carousel-caption">
+                    <h3>New York</h3>
+                    <p>We love the Big Apple!</p>
+                  </div>
+                </div>
+            
+              </div>
+          
+             
+          <button id="nouvellePhoto" class="btn btn-primary">Nouvelle Photo</button>
+              <p><b>Age :</b> {{age}} ans</p>
+            </div>
+            <!-- <form method='POST' name="changeProfil" class='form-group'>
+                {% csrf_token %}
+                Changer de photo de profil ?
+                <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
+                <button type='submit' class='btn btn-primary'>Modifier</button>
+            </form> -->
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form.media}}
+              {{ form.as_p}}
+              <hr>
+              <h4>Ajouter de nouvelles photos !</h4>
+              {{FilesEventFormSet.media}}
+              {{FilesEventFormSet.as_p}}
+              <input type="submit" class="btn btn-primary" value="MODIFER">
+            </form>
+            
+        </div>
+
+
+{% else %} <!-- il s'agit du else de if user.is_authenticated-->
+    <p>Vous n'etes pas connécté</p>
+{% endif %}
+
+    </body>
+
+<script type="text/javascript" src="{% static '/js/main.js' %}"></script>
+<script>
+document.querySelector("#nouvellePhoto").addEventListener('click',function(){
+  window.location.href = "/profil/NouvellePhoto/";
+})
+</script>
+</html>
